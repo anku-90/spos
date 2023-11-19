@@ -1,0 +1,60 @@
+*/header file :(MathLibrary.h)/*
+
+
+#ifdef MATHLIBRARY_EXPORTS
+
+#define MATHLIBRARY_API  __declspec(dllexport)
+#else
+#define MATHLIBRARY_API  __declspec(dllimport)
+#endif
+
+namespace MathLibrary
+{
+	class Functions
+	{
+	public:
+		static MATHLIBRARY_API double Add(double a, double b);
+		static MATHLIBRARY_API double Multiply(double a, double b);
+		static MATHLIBRARY_API double AddMultiply(double a, double b);
+
+	};
+}
+
+cpp file
+
+#include "pch.h"
+#include "MathLibrary.h"
+
+namespace MathLibrary
+{
+	double Functions::Add(double a, double b)
+	{
+		return a + b;
+	}
+	double Functions::Multiply(double a, double b)
+	{
+		return a * b;
+	}
+	double Functions::AddMultiply(double a, double b)
+	{
+		return a + ( a * b);
+	}
+}
+
+client file
+
+#include"iostream"
+#include"pch.h"
+#include"MathLibrary.h"
+
+using namespace std;
+int main()
+{
+    double a = 10;
+    double b = 6;
+    cout << "a + b =" << MathLibrary::Functions::Add(a, b)<<endl;
+    cout << "a * b =" << MathLibrary::Functions::Multiply(a, b)<<endl;
+    cout << "a +(a * b) =" << MathLibrary::Functions::AddMultiply(a, b);
+    return 0;
+}
+
